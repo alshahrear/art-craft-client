@@ -13,7 +13,7 @@ const Navbar = () => {
                 <Link>All Art & craft Items</Link>
                 <Link>Add Craft Item</Link>
                 <Link>My Art&Craft List</Link>
-                <Link className="ml-16">
+                <Link to="/login" className="ml-16">
                 <button className="btn px-8 py-4 bg-[#b1f315] border-0">Login</button>
                 </Link>
             </div>
