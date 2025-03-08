@@ -1,14 +1,32 @@
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { IoLogoGoogle } from "react-icons/io";
 import { RiTwitterXLine } from "react-icons/ri";
 import { RiFacebookCircleFill } from "react-icons/ri";
-import { useLocation } from "react-router-dom";
-
+import { useLocation, useNavigate } from "react-router-dom";
+import { auth } from "../firebase/firebase.config";
 
 
 const GoogleLogin = () => {
+    const googleProvider = new GoogleAuthProvider();
 
     const location = useLocation();
+    const navigate = useNavigate();
     const isRegister = location.pathname === "/register";
+    
+    
+
+    const handleGoogleLogin = () => {
+        signInWithPopup(auth, googleProvider)
+            .then(result => {
+                console.log(result.user);
+                const redirectPath = location.state?.from?.pathname || "/";
+                console.log("Redirecting to:", redirectPath);
+                navigate(redirectPath);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
 
     return (
         <div className="flex justify-end ">
@@ -23,7 +41,7 @@ const GoogleLogin = () => {
                         <span> {isRegister ? "register" : "login"} </span> method</p>
                 </div>
                 <div className="flex justify-end space-x-3 mb-5">
-                    <button className="btn text-white border-0 items-center bg-[#ea4335]">
+                    <button onClick={handleGoogleLogin} className="btn text-white border-0 items-center bg-[#ea4335]">
                         <span><IoLogoGoogle></IoLogoGoogle></span> Google</button>
                     <button className="btn text-white border-0 bg-[#2b57b4]"> <span><RiTwitterXLine></RiTwitterXLine></span> Twitter</button>
                     <button className="btn text-white border-0 bg-[#139af0]"> <span><RiFacebookCircleFill></RiFacebookCircleFill></span>Facebook</button>
