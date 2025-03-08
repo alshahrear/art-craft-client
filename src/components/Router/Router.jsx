@@ -4,6 +4,8 @@ import Rot from "../Rot/Rot";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import AddCraft from "../AddCraft/AddCraft";
+import MyArtCraft from "../MyArtCraft/MyArtCraft";
 
 const router = createBrowserRouter([
     {
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
         {
           path: "/register",
           element: <Register></Register>
+        },
+        {
+          path: "/addCraft",
+          element: <AddCraft></AddCraft>
+        },
+        {
+          path: "/myArtCraft",
+          element: <MyArtCraft></MyArtCraft>
         }
       ]
     },
