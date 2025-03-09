@@ -12,7 +12,7 @@ const ExtraCard = () => {
                     setIsVisible(true);
                 }
             },
-            { threshold: 0.3 } // 30% সেকশন দেখলেই অ্যানিমেশন শুরু হবে
+            { threshold: 0.3 } 
         );
 
         if (sectionRef.current) {
