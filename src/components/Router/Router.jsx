@@ -8,35 +8,36 @@ import AddCraft from "../AddCraft/AddCraft";
 import MyArtCraft from "../MyArtCraft/MyArtCraft";
 import PrivetRoute from "../PrivetRoute/PrivetRoute";
 
-const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Rot></Rot>,
-      errorElement: <ErrorPage></ErrorPage>,
-      children:[
-        {
-            path:"/",
-            element: <Home></Home>
-        },
-        {
-          path:"/login",
-          element: <Login></Login>
-        },
-        {
-          path: "/register",
-          element: <Register></Register>
-        },
-        {
-          path: "/addCraft",
-          element: <PrivetRoute><AddCraft></AddCraft></PrivetRoute>
-        },
-        {
-          path: "/myArtCraft",
-          element: <PrivetRoute><MyArtCraft></MyArtCraft></PrivetRoute>,
-          loader: () => fetch('http://localhost:5000/craft')
-        }
-      ]
-    },
-  ]);
 
-  export default router;
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Rot></Rot>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "/addCraft",
+        element: <PrivetRoute><AddCraft /></PrivetRoute>,
+      },
+      {
+        path: "/myArtCraft",
+        element: <PrivetRoute><MyArtCraft></MyArtCraft></PrivetRoute>,
+        loader: () => fetch('http://localhost:5000/craft')
+      }
+    ],
+  },
+]);
+
+export default router;

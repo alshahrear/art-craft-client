@@ -1,9 +1,10 @@
+import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2'
 
 
 const AddCraft = () => {
 
-    const handleAddCraft = e =>{
+    const handleAddCraft = e => {
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -18,7 +19,7 @@ const AddCraft = () => {
         const photoURL = form.photoURL.value;
         const stockStatus = form.stockStatus.value;
 
-        const addCraft = {name, subcategory, description, price, rating, customization, processingTime, userName, userEmail, photoURL, stockStatus}
+        const addCraft = { name, subcategory, description, price, rating, customization, processingTime, userName, userEmail, photoURL, stockStatus }
 
         console.log(addCraft);
         fetch('http://localhost:5000/craft', {
@@ -28,24 +29,27 @@ const AddCraft = () => {
             },
             body: JSON.stringify(addCraft)
         })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            if(data.insertedId){
-                Swal.fire({
-                    title: 'Success!',
-                    text: 'Craft item added successfully',
-                    icon: 'success',
-                    confirmButtonText: 'Done'
-                  })
-            };
-            form.reset();
-        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'Craft item added successfully',
+                        icon: 'success',
+                        confirmButtonText: 'Done'
+                    })
+                };
+                form.reset();
+            })
     }
 
 
     return (
         <div className=" bg-[#f0f6fa]">
+            <Helmet>
+                <title>Add Craft</title>
+            </Helmet>
             <div className="w-[1200px] mx-auto">
                 <div className="card-body">
                     <h2 className="text-3xl text-center mb-3 font-bold">Add Craft Item</h2>

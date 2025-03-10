@@ -27,6 +27,10 @@ const Faq = () => {
         };
     }, []);
 
+    const handleMessage = e => {
+        e.preventDefault();
+    }
+
     return (
         <div ref={sectionRef} className="w-[1200px] mx-auto mt-20 mb-12">
             <h2 className="text-center text-3xl font-bold mb-8">
@@ -41,11 +45,11 @@ const Faq = () => {
                     <div className="px-10 pb-5 rounded-xl">
                         <img className="w-[350px]" src={faq} alt="" />
                         <h4 className="text-xl font-bold">More Question?</h4>
-                        <form className="fieldset">
+                        <form onSubmit={handleMessage} className="fieldset">
                             <input type="text" className="input" placeholder="Name" />
                             <input type="email" className="input" placeholder="Email" />
                             <textarea className="textarea" placeholder="Comment"></textarea>
-                            <button className="btn bg-[#b1f315] border-0 mt-4">Sent message</button>
+                            <button type="submit" className="btn hover:bg-[#b0f315e0] bg-[#b1f315] border-0 mt-4">Sent message</button>
                         </form>
                     </div>
                 </div>

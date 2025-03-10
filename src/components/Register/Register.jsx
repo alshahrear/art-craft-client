@@ -8,6 +8,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 // import { updateProfile } from "firebase/auth";
 
 const Register = () => {
@@ -51,7 +52,7 @@ const Register = () => {
                     text: 'User created successfully',
                     icon: 'success',
                     confirmButtonText: 'Done'
-                  })
+                })
                 // update profile
                 // updateProfile(result.user, {
                 //     displayName: name,
@@ -76,6 +77,9 @@ const Register = () => {
     return (
         <div className="bg-cover bg-center bg-no-repeat bg-[#343952] pt-10 pb-10 pr-12"
             style={{ backgroundImage: `url(${registerImage})` }}>
+            <Helmet >
+                <title>Register</title>
+            </Helmet>
             <div>
                 <GoogleLogin></GoogleLogin>
             </div>
@@ -88,10 +92,10 @@ const Register = () => {
                             <label className="fieldset-label text-sm font-medium text-white">Email</label>
                             <input type="email" name="email" className="input text-white bg-[#3f3f3f] border-white" placeholder="Email" required />
                             <label className="fieldset-label text-sm font-medium text-white">PhotoURL</label>
-                            <input type="text"name="photoUrl"  className="input text-white bg-[#3f3f3f] border-white" placeholder="Photo URL" />
+                            <input type="text" name="photoUrl" className="input text-white bg-[#3f3f3f] border-white" placeholder="Photo URL" />
                             <label className="fieldset-label text-white text-sm font-medium">Password</label>
                             <div>
-                                <input type={showPassword ? 'text' : 'password'} name="password" className="relative input text-white bg-[#3f3f3f] border-white" placeholder="Password" required/>
+                                <input type={showPassword ? 'text' : 'password'} name="password" className="relative input text-white bg-[#3f3f3f] border-white" placeholder="Password" required />
                                 <span className="absolute mt-2 right-12 text-white text-xl" onClick={() => setShowPassword(!showPassword)}>
                                     {
                                         showPassword ? <FaEyeSlash></FaEyeSlash> :
@@ -103,7 +107,7 @@ const Register = () => {
                                 <input type="checkbox" name="" id="" required />
                                 <p className="ml-3 text-white text-sm font-medium" >I agree to all term and privacy policy</p>
                             </div>
-                            <button type="submit" className="btn border-0 mt-4 bg-[#b1f315] text-lg font-semibold">Register</button>
+                            <button type="submit" className="btn border-0 mt-4 bg-[#b1f315] hover:bg-[#c5ff33] text-lg font-semibold">Register</button>
                             <Link to="/login">
                                 <p className="text-white mt-3 text-lg font-normal">Already have an account? <span className="text-[#b1f315] link-hover">Login</span></p>
                             </Link>

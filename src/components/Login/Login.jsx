@@ -1,16 +1,17 @@
+import { AuthContext } from "../Provider/AuthProvider";
+import { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
 import loginImage from "../../assets/login.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IoEye } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa";
-import { useContext, useState } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
-    const { signIn } = useContext(AuthContext);
+    const { signIn, loading } = useContext(AuthContext); // ✅ loading আনলাম
     const [showPassword, setShowPassword] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
@@ -29,7 +30,7 @@ const Login = () => {
                     text: 'User login successfully',
                     icon: 'success',
                     confirmButtonText: 'Done'
-                })
+                });
                 const redirectPath = location.state?.from?.pathname || "/";
                 console.log("Redirecting to:", redirectPath);
                 navigate(redirectPath);
@@ -40,13 +41,24 @@ const Login = () => {
                     position: "top-right",
                     autoClose: 2000,
                 });
-
             });
+    };
+
+    // ✅ Loading হলে Loader দেখাবে
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center h-screen bg-[#343952]">
+                <span className="loading loading-spinner loading-lg text-[#b1f315]"></span>
+            </div>
+        );
     }
 
     return (
         <div className="bg-cover bg-center bg-no-repeat bg-[#343952] pt-10 pb-10 pr-12"
             style={{ backgroundImage: `url(${loginImage})` }}>
+            <Helmet>
+                <title>Login</title>
+            </Helmet>
             <div>
                 <GoogleLogin></GoogleLogin>
             </div>
@@ -60,16 +72,17 @@ const Login = () => {
                             <div>
                                 <input name="password" type={showPassword ? 'text' : 'password'} className="relative input text-white bg-[#3f3f3f] border-white" placeholder="Password" />
                                 <span className="absolute mt-2 right-12 text-white text-xl" onClick={() => setShowPassword(!showPassword)}>
-                                    {
-                                        showPassword ? <FaEyeSlash></FaEyeSlash> :
-                                            <IoEye></IoEye>
-                                    }
+                                    {showPassword ? <FaEyeSlash /> : <IoEye />}
                                 </span>
                             </div>
-                            <div className="mt-2"><a className="link link-hover text-white text-sm font-medium ">Forgot password?</a></div>
-                            <button type="submit" className="btn border-0 mt-4 bg-[#b1f315] text-lg font-semibold">Login</button>
+                            <div className="mt-2">
+                                <a className="link link-hover text-white text-sm font-medium">Forgot password?</a>
+                            </div>
+                            <button type="submit" className="btn border-0 mt-4 bg-[#b1f315] hover:bg-[#c5ff33] text-lg font-semibold">Login</button>
                             <Link to="/register">
-                                <p className="text-white mt-3 text-lg font-normal">Don't have an account? <span className="text-[#b1f315] link-hover">Register</span></p>
+                                <p className="text-white mt-3 text-lg font-normal">
+                                    Don't have an account? <span className="text-[#b1f315] link-hover">Register</span>
+                                </p>
                             </Link>
                         </form>
                         <ToastContainer />

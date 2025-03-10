@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import MyArtCard from "../MyArtCard/MyArtCard";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const MyArtCraft = () => {
     const [crafts, setCrafts] = useState(useLoaderData());  // Added state for crafts
@@ -40,10 +41,10 @@ const MyArtCraft = () => {
                 if (data.modifiedCount > 0) {
                     Swal.fire('Success!', 'Craft updated successfully!', 'success');
                     // Update the crafts list to reflect the updated craft
-                    setCrafts(crafts.map(craft => 
+                    setCrafts(crafts.map(craft =>
                         craft._id === selectedCraft._id ? { ...craft, ...updatedCraft } : craft
                     ));
-                    setSelectedCraft(null); 
+                    setSelectedCraft(null);
                 }
             });
     };
@@ -80,6 +81,9 @@ const MyArtCraft = () => {
 
     return (
         <div className="w-[1200px] mx-auto mt-10 mb-40">
+            <Helmet>
+                <title>My Art Craft</title>
+            </Helmet>
             <p className="text-center -mt-5 mb-5"><span className="bg-[#b1f315] text-2xl font-semibold rounded-full px-4 py-2">My Art & Craft List</span></p>
             <div className="grid grid-cols-2 gap-x-10 gap-y-36">
                 {crafts.map(craft => <MyArtCard key={craft._id} craft={craft} handleUpdateModal={handleUpdateModal} handleDelete={handleDelete} />)}
